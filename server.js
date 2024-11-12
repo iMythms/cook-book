@@ -44,10 +44,10 @@ app.get('/', async (req, res) => {
 
 // Require and use Controller
 const authController = require('./controller/auth')
-const templateController = require('./controller/template')
+// const templateController = require('./controller/template')
 
 app.use('/auth', authController)
-app.use('/template', isSignedIn, templateController)
+// app.use('/template', isSignedIn, templateController)
 
 // Landing Page
 app.get('/', async (req, res) => {
