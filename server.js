@@ -34,7 +34,6 @@ app.use(
 		}),
 	})
 )
-app.use(passUserToView)
 
 app.get('/', async (req, res) => {
 	res.render('index.ejs', {
@@ -43,11 +42,15 @@ app.get('/', async (req, res) => {
 })
 
 // Require and use Controller
-const authController = require('./controller/auth')
-// const templateController = require('./controller/template')
+const authController = require('./controller/auth.js')
+const recipesController = require('./controller/recipe.js')
+const ingredientsController = require('./controller/ingredient.js')
 
+app.use(passUserToView)
 app.use('/auth', authController)
-// app.use('/template', isSignedIn, templateController)
+app.use(isSignedIn)
+app.use('/recipes', recipesController)
+app.use('/ingredients', ingredientsController)
 
 // Landing Page
 app.get('/', async (req, res) => {
@@ -56,5 +59,5 @@ app.get('/', async (req, res) => {
 
 // Listening
 app.listen(PORT, () => {
-	console.log(`Running on localhost${PORT}`)
+	console.log(`Running on localhost:${PORT}`)
 })

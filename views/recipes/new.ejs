@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/globals.css" />
+		<script src="https://cdn.tailwindcss.com"></script>
+		<title>Create a New Recipe</title>
+	</head>
+	<body class="bg-slate-100 h-dvh">
+		<%- include('../partials/_navbar.ejs') %>
+		<div class="flex items-center justify-center h-dvh">
+			<div class="bg-white w-fit p-24 rounded-3xl flex flex-col gap-5">
+				<h1 class="font-semibold text-4xl">Create a New Recipe</h1>
+				<form
+					action="/recipes"
+					method="POST"
+					class="flex flex-col gap-4 w-full"
+				>
+					<div class="flex flex-col gap-2">
+						<label for="name">Recipe Name</label>
+						<input
+							type="text"
+							id="name"
+							name="name"
+							class="bg-[#F7FBFF] border border-[#D4D7E3] rounded-lg max-h-10 px-2 py-3 placeholder:font-extralight placeholder:text-sm text-sm"
+							placeholder="Enter recipe name"
+							required
+						/>
+					</div>
+					<div class="flex flex-col gap-2">
+						<label for="ingredients" class="font-medium">Ingredients</label>
+						<select
+							id="ingredients"
+							name="ingredients"
+							multiple
+							class="bg-[#F7FBFF] border border-[#D4D7E3] rounded-lg h-32 px-2 py-3 placeholder:font-extralight placeholder:text-sm overflow-auto"
+						>
+							<% ingredients.forEach(ingredient => { %>
+							<option
+								value="<%= ingredient._id %>"
+								class="p-1 my-1 rounded-md text-sm hover:bg-[#D4E4FF]"
+							>
+								<%= ingredient.name %>
+							</option>
+							<% }) %>
+						</select>
+						<p class="text-sm text-gray-500">
+							Hold <kbd class="font-bold">Ctrl</kbd> (Windows) or
+							<kbd class="font-bold">Cmd</kbd> (Mac) to select multiple
+							ingredients.
+						</p>
+					</div>
+					<div class="flex flex-col gap-2">
+						<label for="instructions">Instructions</label>
+						<textarea
+							id="instructions"
+							name="instructions"
+							class="bg-[#F7FBFF] border border-[#D4D7E3] rounded-lg h-40 px-2 py-3 placeholder:font-extralight placeholder:text-sm text-sm"
+							placeholder="Write instructions here"
+						></textarea>
+					</div>
+
+					<button
+						type="submit"
+						class="bg-[#162D3A] text-lg text-white font-normal rounded-lg py-1 mt-4 hover:bg-[#1E4AE9] border border-[#162D3A]"
+					>
+						Create Recipe
+					</button>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

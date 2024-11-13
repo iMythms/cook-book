@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/global.css" />
+		<script src="https://cdn.tailwindcss.com"></script>
+		<title><%= ingredient.name %></title>
+	</head>
+	<body class="bg-slate-100 h-dvh">
+		<%- include('../partials/_navbar.ejs') %>
+		<section class="container mx-auto">
+			<div class="flex items-center justify-center h-dvh">
+				<div class="bg-white w-fit p-16 rounded-3xl flex flex-col gap-8">
+					<h1 class="font-semibold text-4xl"><%= ingredient.name %></h1>
+					<div class="flex gap-1">
+						<img src="/user.svg" alt="User" class="w-5" />
+						<h6 class="text-lg"><%= ingredient.owner.username %></h6>
+					</div>
+					<div class="grid grid-cols-2 gap-2">
+						<a
+							href="/ingredients/<%= ingredient._id %>/edit"
+							class="bg-[#162D3A] text-base text-center text-white font-normal rounded-xl py-1 px-4 h-fit hover:animate-pulse"
+							>Edit</a
+						>
+						<form
+							action="/ingredients/<%= ingredient._id %>?_method=DELETE"
+							method="POST"
+						>
+							<button
+								type="submit"
+								class="bg-[#C02000] text-base text-center text-white font-normal rounded-xl py-1 px-4 h-fit hover:animate-pulse"
+							>
+								Delete Ingredient
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>
