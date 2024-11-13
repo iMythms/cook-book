@@ -55,10 +55,11 @@ router.get('/:recipeId', async (req, res) => {
 // Edit
 router.get('/:recipeId/edit', async (req, res) => {
 	try {
-		const populatedRecipe = await Recipe.findById(req.params.recipeId).populate(
-			'owner'
-		)
-		res.render('recipes/edit.ejs', { recipe: populatedRecipe })
+		const recipe = await Recipe.findById(req.params.recipeId).populate(
+			'ingredients'
+		) // Fetch the recipe
+		const ingredients = await Ingredient.find() // Fetch all ingredients
+		res.render('recipes/edit.ejs', { recipe, ingredients }) // Pass both recipe and ingredients
 	} catch (err) {
 		console.log(err)
 		res.redirect('/')

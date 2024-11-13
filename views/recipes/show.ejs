@@ -7,15 +7,55 @@
 		<script src="https://cdn.tailwindcss.com"></script>
 		<title><%= recipe.name %></title>
 	</head>
-	<body>
+	<body class="bg-slate-100 h-dvh">
 		<%- include('../partials/_navbar.ejs') %>
-		<h1><%= recipe.name %></h1>
-		<p><%= recipe.instructions %></p>
-		<h2>Ingredients</h2>
-		<ul>
-			<% recipe.ingredients.forEach(ingredient => { %>
-			<li><%= ingredient.name %></li>
-			<% }) %>
-		</ul>
+
+		<section class="container mx-auto">
+			<div class="flex items-center justify-center h-dvh">
+				<div class="bg-white w-fit p-16 rounded-3xl flex flex-col gap-8">
+					<div class="flex flex-col gap-2">
+						<h1 class="font-semibold text-4xl"><%= recipe.name %></h1>
+						<div class="flex gap-1">
+							<img src="/user.svg" alt="User" class="w-5" />
+							<h6 class="text-lg"><%= recipe.owner.username %></h6>
+						</div>
+					</div>
+					<div class="flex flex-col">
+						<h5 class="text-2xl font-semibold mb-2">Instructions</h5>
+						<% recipe.instructions.split('.').forEach(sentence => { %>
+						<p><%= sentence.trim() %></p>
+						<% }) %>
+					</div>
+
+					<div>
+						<h5 class="text-2xl font-semibold mb-2">Ingredients</h5>
+						<div>
+							<% recipe.ingredients.forEach(ingredient => { %>
+							<li><%= ingredient.name %></li>
+							<% }) %>
+						</div>
+					</div>
+
+					<div class="flex gap-2 justify-end w-full">
+						<a
+							href="/recipes/<%= recipe._id %>/edit"
+							class="bg-[#162D3A] text-base text-center text-white font-normal rounded-xl py-1 px-4 h-fit hover:animate-pulse"
+							>Edit Recipe</a
+						>
+						<form
+							action="/recipes/<%= recipe._id %>?_method=DELETE"
+							method="POST"
+						>
+							<button
+								type="submit"
+								class="bg-[#C02000] text-base text-center text-white font-normal rounded-xl py-1 px-4 h-fit hover:animate-pulse"
+							>
+								Delete Recipe
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
 	</body>
 </html>
