@@ -13,7 +13,7 @@ const signedOut = (req, res) => {
 	})
 }
 
-router.get('sign-out', signedOut)
+router.get('/sign-out', signedOut)
 
 router.post('/sign-up', async (req, res) => {
 	const userInDatabase = await User.findOne({ username: req.body.username })
